@@ -1,30 +1,29 @@
-const form = document.getElementById("applyForm");
+document.addEventListener('DOMContentLoaded', () => {
+    const loginBtn = document.getElementById('loginBtn');
+    const loginModal = document.getElementById('loginModal');
+    const modalClose = document.getElementById('modalClose');
 
-form.addEventListener("submit", function(e){
+    // 点击登录按钮打开弹窗
+    if (loginBtn && loginModal) {
+        loginBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginModal.classList.add('active');
+        });
+    }
 
-    e.preventDefault();
+    // 点击叉号关闭弹窗
+    if (modalClose && loginModal) {
+        modalClose.addEventListener('click', () => {
+            loginModal.classList.remove('active');
+        });
+    }
 
-    const username =
-    document.getElementById("username").value;
-
-    const reason =
-    document.getElementById("reason").value;
-
-    const result =
-    document.getElementById("result");
-
-    result.innerHTML =
-    `
-    申请已提交<br>
-    申请邮箱：
-    <b>${username}@nanocat.xin</b>
-    `;
-
-    console.log({
-        username,
-        reason
-    });
-
-    form.reset();
-
+    // 点击弹窗外部空白处也能关闭弹窗
+    if (loginModal) {
+        loginModal.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.classList.remove('active');
+            }
+        });
+    }
 });
