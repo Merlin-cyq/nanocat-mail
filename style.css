@@ -27,13 +27,16 @@ header{
     padding:25px 8%;
 }
 
-.logo{
+.logo,
+.logo:link,
+.logo:visited,
+.logo:hover,
+.logo:active{
     font-size:28px;
     font-weight:bold;
     color:#8b5cf6;
     text-shadow:0 0 15px #8b5cf6;
-    text-decoration:none;
-    transition:.3s;
+    text-decoration:none !important;
 }
 
 .logo:hover{
