@@ -1,206 +1,349 @@
+/* ==========================================
+   1. 全局初始化与基础设置
+   ========================================== */
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body{
-    background:#050510;
-    color:white;
-    font-family:"Segoe UI",sans-serif;
-    overflow-x:hidden;
+    background: #050510;
+    color: white;
+    font-family: "Segoe UI", sans-serif;
+    overflow-x: hidden;
 }
 
-.background{
-    position:fixed;
-    inset:0;
+/* 统一的星空渐变背景 */
+.background {
+    position: fixed;
+    inset: 0;
     background:
-    radial-gradient(circle at 20% 20%,#4f46e520 0%,transparent 30%),
-    radial-gradient(circle at 80% 60%,#7c3aed20 0%,transparent 30%);
-    z-index:-2;
+    radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 30%),
+    radial-gradient(circle at 80% 60%, rgba(168, 85, 247, 0.15) 0%, transparent 30%);
+    z-index: -2;
 }
 
+/* ==========================================
+   2. 统一的顶部导航栏 (Header)
+   ========================================== */
 header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:25px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 8%;
 }
 
-.logo,
-.logo:link,
-.logo:visited,
-.logo:hover,
-.logo:active{
-    font-size:28px;
-    font-weight:bold;
-    color:#8b5cf6;
-    text-shadow:0 0 15px #8b5cf6;
-    text-decoration:none !important;
+/* 完美统一的 Logo 样式：无下划线，字号一致 */
+a.logo,
+a.logo:link,
+a.logo:visited,
+a.logo:hover,
+a.logo:active {
+    font-size: 28px !important;
+    font-weight: bold;
+    color: #8b5cf6;
+    text-shadow: 0 0 15px #8b5cf6;
+    text-decoration: none !important;
+    transition: 0.3s;
 }
 
-.logo:hover{
-    color:#a78bfa;
-    text-shadow:0 0 25px #8b5cf6;
+a.logo:hover{
+    color: #a78bfa;
+    text-shadow: 0 0 25px #8b5cf6;
 }
 
 nav a{
-    color:white;
-    text-decoration:none;
-    margin-left:20px;
-    transition:0.3s;
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+    transition: 0.3s;
 }
 
-nav a:hover{
-    color:#8b5cf6;
+nav a:hover,
+nav a.active {
+    color: #8b5cf6;
 }
 
+/* ==========================================
+   3. 首页 (index.html) 专属样式
+   ========================================== */
 .hero{
-    min-height:80vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 .hero h1{
-    font-size:70px;
-    background:linear-gradient(
-    90deg,
-    #60a5fa,
-    #8b5cf6
-    );
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+    font-size: 70px;
+    background: linear-gradient(90deg, #60a5fa, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .subtitle{
-    margin-top:15px;
-    font-size:24px;
-    color:#aaa;
+    margin-top: 15px;
+    font-size: 24px;
+    color: #aaa;
 }
 
 .description{
-    margin-top:20px;
-    color:#ccc;
-    line-height:1.8;
+    margin-top: 20px;
+    color: #ccc;
+    line-height: 1.8;
 }
 
 .buttons{
-    margin-top:40px;
+    margin-top: 40px;
 }
 
 .btn{
-    display:inline-block;
-    padding:14px 28px;
-    border-radius:12px;
-    text-decoration:none;
-    margin:0 10px;
-    transition:0.3s;
+    display: inline-block;
+    padding: 14px 28px;
+    border-radius: 12px;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: 0.3s;
 }
 
 .primary{
-    background:linear-gradient(
-    90deg,
-    #3b82f6,
-    #8b5cf6
-    );
-    color:white;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    color: white;
 }
 
 .secondary{
-    border:1px solid #8b5cf6;
-    color:white;
+    border: 1px solid #8b5cf6;
+    color: white;
 }
 
 .btn:hover{
-    transform:translateY(-3px);
+    transform: translateY(-3px);
 }
 
 .card-section{
-    padding:80px 10%;
-    text-align:center;
+    padding: 80px 10%;
+    text-align: center;
 }
 
 .card-section h2{
-    margin-bottom:40px;
-    font-size:40px;
+    margin-bottom: 40px;
+    font-size: 40px;
 }
 
 .cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
 }
 
 .card{
-    background:rgba(255,255,255,0.05);
-    backdrop-filter:blur(15px);
-    border:1px solid rgba(255,255,255,0.08);
-    border-radius:20px;
-    padding:30px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 30px;
 }
 
 .card h3{
-    margin-bottom:15px;
-    color:#8b5cf6;
+    margin-bottom: 15px;
+    color: #8b5cf6;
 }
 
+/* 表单样式 */
 form{
-    max-width:500px;
-    margin:auto;
+    max-width: 500px;
+    margin: auto;
 }
 
-input,
-textarea{
-    width:100%;
-    padding:15px;
-    margin-bottom:15px;
-    border:none;
-    border-radius:12px;
-    background:#111827;
-    color:white;
+input, textarea{
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 12px;
+    background: #111827;
+    color: white;
 }
 
 textarea{
-    height:120px;
+    height: 120px;
 }
 
 button{
-    width:100%;
-    padding:15px;
-    border:none;
-    border-radius:12px;
-    cursor:pointer;
-    color:white;
-    font-size:16px;
-    background:linear-gradient(
-    90deg,
-    #3b82f6,
-    #8b5cf6
-    );
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    color: white;
+    font-size: 16px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
 }
 
 #result{
-    margin-top:20px;
-    color:#60a5fa;
+    margin-top: 20px;
+    color: #60a5fa;
 }
 
+/* ==========================================
+   4. 关于页 (about.html) 专属样式
+   ========================================== */
+.about-hero{
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.about-hero h1{
+    font-size: 72px;
+    background: linear-gradient(90deg, #60a5fa, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.about-hero p{
+    margin-top: 20px;
+    font-size: 20px;
+    color: #aaa;
+}
+
+.section{
+    padding: 80px 10%;
+}
+
+.section-title{
+    font-size: 42px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.glass-card{
+    background: rgba(255, 255, 255, .05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 24px;
+    padding: 35px;
+    margin-bottom: 25px;
+    box-shadow: 0 0 25px rgba(139, 92, 246, .15);
+}
+
+.glass-card h3{
+    margin-bottom: 15px;
+    color: #8b5cf6;
+}
+
+.glass-card p{
+    color: #ccc;
+    line-height: 1.8;
+}
+
+/* 时间线样式 */
+.timeline{
+    position: relative;
+    max-width: 900px;
+    margin: auto;
+}
+
+.timeline::before{
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: #8b5cf6;
+    transform: translateX(-50%);
+}
+
+.timeline-item{
+    width: 50%;
+    padding: 25px;
+    position: relative;
+}
+
+.timeline-item:nth-child(odd){
+    left: 0;
+    text-align: right;
+}
+
+.timeline-item:nth-child(even){
+    left: 50%;
+}
+
+.timeline-dot{
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: #8b5cf6;
+    border-radius: 50%;
+    top: 35px;
+    box-shadow: 0 0 20px #8b5cf6;
+}
+
+.timeline-item:nth-child(odd) .timeline-dot{
+    right: -9px;
+}
+
+.timeline-item:nth-child(even) .timeline-dot{
+    left: -9px;
+}
+
+/* 路线图样式 */
+.roadmap{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.step{
+    padding: 25px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, .05);
+    border: 1px solid rgba(255, 255, 255, .08);
+    transition: .3s;
+}
+
+.step:hover{
+    transform: translateY(-6px);
+    box-shadow: 0 0 25px rgba(139, 92, 246, .25);
+}
+
+.done{ border-color: #22c55e; }
+.current{ border-color: #3b82f6; }
+.future{ border-color: #8b5cf6; }
+
+/* ==========================================
+   5. 页脚与响应式媒体查询
+   ========================================== */
 footer{
-    text-align:center;
-    padding:30px;
-    color:#888;
+    text-align: center;
+    padding: 40px;
+    color: #888;
 }
 
-@media(max-width:768px){
-
-.hero h1{
-    font-size:42px;
-}
-
-header{
-    flex-direction:column;
-    gap:20px;
-}
-
+@media(max-width: 768px){
+    header{
+        flex-direction: column;
+        gap: 20px;
+    }
+    nav a{
+        margin: 0 10px;
+    }
+    .hero h1, .about-hero h1{
+        font-size: 45px;
+    }
+    .timeline::before{
+        left: 20px;
+    }
+    .timeline-item{
+        width: 100%;
+        left: 0 !important;
+        text-align: left !important;
+        padding-left: 55px;
+    }
+    .timeline-dot{
+        left: 11px !important;
+        right: auto !important;
+    }
 }
