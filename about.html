@@ -42,6 +42,13 @@ font-size:30px;
 font-weight:bold;
 color:#8b5cf6;
 text-shadow:0 0 15px #8b5cf6;
+text-decoration:none;
+transition:.3s;
+}
+
+.logo:hover{
+color:#a78bfa;
+text-shadow:0 0 25px #8b5cf6;
 }
 
 nav a{
@@ -52,6 +59,10 @@ transition:.3s;
 }
 
 nav a:hover{
+color:#8b5cf6;
+}
+
+nav a.active{
 color:#8b5cf6;
 }
 
@@ -216,6 +227,11 @@ left:11px !important;
 right:auto !important;
 }
 
+header{
+flex-direction:column;
+gap:20px;
+}
+
 }
 
 </style>
@@ -224,13 +240,18 @@ right:auto !important;
 <body>
 
 <header>
-<div class="logo">NanoCat Mail</div>
+
+<a href="index.html" class="logo">
+NanoCat Mail
+</a>
 
 <nav>
 <a href="index.html">首页</a>
 <a href="index.html#features">功能</a>
 <a href="index.html#apply">申请</a>
+<a href="about.html" class="active">关于</a>
 </nav>
+
 </header>
 
 <section class="hero">
@@ -248,17 +269,19 @@ Building a Private Mail Community
 <h2 class="section-title">项目理念</h2>
 
 <div class="glass-card">
+
 <h3>🐱 NanoCat 是什么？</h3>
 
 <p>
 NanoCat Mail 是一个正在建设中的私人邮箱社区项目。
-
+<br><br>
 Nano 代表小巧与无限可能，
 Cat 代表自由、探索与好奇。
-
+<br><br>
 我们希望打造一个小而精致、稳定可靠的邮箱服务，
 让每一个 @nanocat.xin 地址都拥有独特的归属感。
 </p>
+
 </div>
 
 </section>
@@ -271,37 +294,49 @@ Cat 代表自由、探索与好奇。
 
 <div class="timeline-item">
 <div class="timeline-dot"></div>
-
 <div class="glass-card">
 <h3>2026 Q2</h3>
-<p>注册 nanocat.xin 域名</p>
+<p>✓ 注册 nanocat.xin 域名</p>
 </div>
 </div>
 
 <div class="timeline-item">
 <div class="timeline-dot"></div>
-
 <div class="glass-card">
 <h3>2026 Q2</h3>
-<p>官方网站上线</p>
+<p>✓ NanoCat 官方网站上线</p>
 </div>
 </div>
 
 <div class="timeline-item">
 <div class="timeline-dot"></div>
-
 <div class="glass-card">
 <h3>2026 Q3</h3>
-<p>邮箱系统部署</p>
+<p>⏳ 邮箱系统部署</p>
 </div>
 </div>
 
 <div class="timeline-item">
 <div class="timeline-dot"></div>
-
 <div class="glass-card">
 <h3>2026 Q3</h3>
-<p>用户管理后台</p>
+<p>⏳ 用户管理后台开发</p>
+</div>
+</div>
+
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="glass-card">
+<h3>2026 Q4</h3>
+<p>□ Beta 测试开放</p>
+</div>
+</div>
+
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="glass-card">
+<h3>2027</h3>
+<p>□ 正式开放 NanoCat Mail</p>
 </div>
 </div>
 
