@@ -2,26 +2,40 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginBtn = document.getElementById('loginBtn');
     const loginModal = document.getElementById('loginModal');
     const modalClose = document.getElementById('modalClose');
+    const accountKey = 'nanocat-account';
+    const mailUrl = 'mail/index.html';
+    const loginUrl = `login.html?next=${encodeURIComponent(mailUrl)}`;
 
-    // 点击登录按钮打开弹窗
-    if (loginBtn && loginModal) {
-        loginBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            loginModal.classList.add('active');
-        });
+    let account = null;
+    try {
+        account = JSON.parse(localStorage.getItem(accountKey));
+    } catch (error) {
+        account = null;
     }
 
-    // 点击叉号关闭弹窗
+    if (loginBtn) {
+        if (account && account.email) {
+            loginBtn.textContent = account.displayName || account.email;
+            loginBtn.href = mailUrl;
+            loginBtn.title = '进入 NanoCat Mail';
+            loginBtn.classList.add('logged-in');
+        } else {
+            loginBtn.textContent = '登录';
+            loginBtn.href = loginUrl;
+            loginBtn.title = '登录 NanoCat Mail';
+            loginBtn.classList.remove('logged-in');
+        }
+    }
+
     if (modalClose && loginModal) {
         modalClose.addEventListener('click', () => {
             loginModal.classList.remove('active');
         });
     }
 
-    // 点击弹窗外部空白处也能关闭弹窗
     if (loginModal) {
-        loginModal.addEventListener('click', (e) => {
-            if (e.target === loginModal) {
+        loginModal.addEventListener('click', (event) => {
+            if (event.target === loginModal) {
                 loginModal.classList.remove('active');
             }
         });

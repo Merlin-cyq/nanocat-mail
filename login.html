@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 - NanoCat Mail</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="background"></div>
+
+<header>
+    <a href="index.html" class="logo">NanoCat Mail</a>
+    <nav>
+        <a href="index.html">首页</a>
+        <a href="index.html#features">功能</a>
+        <a href="apply.html">申请</a>
+        <a href="about.html">关于</a>
+        <a href="login.html" class="nav-btn-login active" id="loginBtn">登录</a>
+    </nav>
+</header>
+
+<main class="login-page">
+    <section class="login-card glass-card">
+        <h1>登录 NanoCat Mail</h1>
+        <p>当前是前端演示登录，会把登录状态保存在本机浏览器里。</p>
+
+        <form id="loginForm" class="login-form">
+            <label>
+                邮箱地址
+                <input id="emailInput" type="email" placeholder="admin@nanocat.xin" autocomplete="email" required>
+            </label>
+            <label>
+                密码
+                <input id="passwordInput" type="password" placeholder="演示版任意填写" autocomplete="current-password" required>
+            </label>
+            <button class="btn primary" type="submit">登录并进入邮箱</button>
+        </form>
+
+        <button class="logout-link" id="logoutButton" type="button">清除本机登录状态</button>
+    </section>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const accountKey = 'nanocat-account';
+    const params = new URLSearchParams(window.location.search);
+    const nextUrl = params.get('next') || 'mail/index.html';
+    const form = document.getElementById('loginForm');
+    const emailInput = document.getElementById('emailInput');
+    const logoutButton = document.getElementById('logoutButton');
+    const saved = localStorage.getItem(accountKey);
+
+    if (saved) {
+        try {
+            const account = JSON.parse(saved);
+            if (account.email) emailInput.value = account.email;
+        } catch (error) {
+            localStorage.removeItem(accountKey);
+        }
+    }
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const email = emailInput.value.trim();
+        const displayName = email.split('@')[0] || email;
+        localStorage.setItem(accountKey, JSON.stringify({
+            email,
+            displayName,
+            loginAt: new Date().toISOString()
+        }));
+        window.location.href = nextUrl;
+    });
+
+    logoutButton.addEventListener('click', () => {
+        localStorage.removeItem(accountKey);
+        emailInput.value = '';
+        document.getElementById('passwordInput').value = '';
+    });
+});
+</script>
+</body>
+</html>
