@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NanoCat Mail App</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="NanoCat Mail">
+        <span class="brand-mark">N</span>
+        <span>
+          <strong>NanoCat</strong>
+          <small>Mail</small>
+        </span>
+      </a>
+
+      <button class="compose-button" id="composeButton" type="button">
+        <span>+</span>
+        写邮件
+      </button>
+
+      <nav class="folders" aria-label="邮箱文件夹">
+        <button class="folder active" type="button" data-folder="inbox">
+          <span>收件箱</span>
+          <strong id="inboxCount">0</strong>
+        </button>
+        <button class="folder" type="button" data-folder="starred">
+          <span>星标</span>
+          <strong id="starredCount">0</strong>
+        </button>
+        <button class="folder" type="button" data-folder="sent">
+          <span>已发送</span>
+          <strong id="sentCount">0</strong>
+        </button>
+        <button class="folder" type="button" data-folder="drafts">
+          <span>草稿</span>
+          <strong id="draftCount">0</strong>
+        </button>
+        <button class="folder" type="button" data-folder="archive">
+          <span>归档</span>
+          <strong id="archiveCount">0</strong>
+        </button>
+      </nav>
+
+      <div class="account-card">
+        <span class="avatar" id="userInitial">N</span>
+        <div>
+          <strong id="userName">用户</strong>
+          <small id="userEmail">@nanocat.xin</small>
+        </div>
+      </div>
+    </aside>
+
+    <main class="workspace">
+      <header class="topbar">
+        <div>
+          <h1 id="folderTitle">收件箱</h1>
+          <p id="folderSubtitle">整理你的 NanoCat 邮件</p>
+        </div>
+        <a href="../index.html" style="color: #8b5cf6; text-decoration: none; font-size: 14px;">← 返回主页</a>
+        <label class="search-box">
+          <span>⌕</span>
+          <input id="searchInput" type="search" placeholder="搜索邮件、联系人或主题">
+        </label>
+      </header>
+
+      <section class="mail-layout">
+        <section class="mail-list-panel" aria-label="邮件列表">
+          <div class="list-toolbar">
+            <button id="refreshButton" type="button">刷新</button>
+            <button id="selectUnreadButton" type="button">未读</button>
+          </div>
+          <div class="mail-list" id="mailList"></div>
+        </section>
+
+        <article class="reader" id="reader">
+          <div class="empty-reader">
+            <span class="empty-mark">N</span>
+            <h2>选择一封邮件</h2>
+            <p>阅读、星标、归档或快速回复。</p>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <section class="composer" id="composer" aria-hidden="true">
+    <form class="composer-card" id="composeForm">
+      <header>
+        <h2>新邮件</h2>
+        <button class="icon-button" id="closeComposer" type="button" aria-label="关闭写信窗口">×</button>
+      </header>
+      <input id="toInput" type="email" placeholder="收件人" required>
+      <input id="subjectInput" type="text" placeholder="主题" required>
+      <textarea id="bodyInput" placeholder="写点什么..." required></textarea>
+      <footer>
+        <button class="secondary-button" id="saveDraftButton" type="button">保存草稿</button>
+        <button class="send-button" type="submit">发送</button>
+      </footer>
+    </form>
+  </section>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

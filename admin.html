@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理后台 - NanoCat Mail</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="background"></div>
+
+<header>
+    <a href="index.html" class="logo">NanoCat Mail</a>
+    <nav>
+        <a href="index.html">首页</a>
+        <a href="index.html#features">功能</a>
+        <a href="apply.html">申请</a>
+        <a href="about.html">关于</a>
+        <a href="blog.html">博客</a>
+        <a href="login.html" class="nav-btn-login" id="loginBtn">登录</a>
+    </nav>
+</header>
+
+<main class="admin-page" id="adminPage">
+    <section class="section">
+        <h2 class="section-title" style="font-size: 36px;">管理后台</h2>
+        <p style="text-align: center; color: #aaa; margin-bottom: 40px;">用户注册审核</p>
+
+        <div id="loadingMsg" style="text-align: center; color: #aaa;">加载中...</div>
+
+        <div id="pendingList" class="pending-list" style="display: none;"></div>
+
+        <div id="emptyMsg" class="glass-card" style="display: none; text-align: center; max-width: 500px; margin: 0 auto;">
+            <p style="color: #888;">暂无待审核用户 🎉</p>
+        </div>
+
+        <div id="adminError" class="form-error" style="text-align: center;"></div>
+    </section>
+</main>
+
+<!-- 无权限提示 -->
+<div id="noAccess" style="display: none; text-align: center; padding: 100px 20px;">
+    <h2 style="color: #8b5cf6; font-size: 32px; margin-bottom: 20px;">无权访问</h2>
+    <p style="color: #aaa;">此页面仅限管理员访问</p>
+    <a href="login.html" class="btn primary" style="margin-top: 30px;">前往登录</a>
+</div>
+
+<footer>
+    © 2026 NanoCat Mail
+</footer>
+
+<script src="script.js"></script>
+<script>
+const API_BASE = "/api";
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const token = localStorage.getItem("nanocat-token");
+  if (!token) {
+    showNoAccess();
+    return;
+  }
+
+  try {
+    const meRes = await fetch(`${API_BASE}/me`, {
+      headers: { "Authorization": `Bearer ${token}` },
+    });
+    if (!meRes.ok || meRes.status === 401) {
+      localStorage.removeItem("nanocat-token");
+      showNoAccess();
+      return;
+    }
+    const me = await meRes.json();
+    if (me.role !== "admin") {
+      showNoAccess();
+      return;
+    }
+  } catch {
+    showNoAccess();
+    return;
+  }
+
+  document.getElementById("adminPage").style.display = "block";
+  loadPending();
+});
+
+async function loadPending() {
+  const token = localStorage.getItem("nanocat-token");
+  const loading = document.getElementById("loadingMsg");
+  const list = document.getElementById("pendingList");
+  const empty = document.getElementById("emptyMsg");
+  const errEl = document.getElementById("adminError");
+
+  loading.style.display = "block";
+  list.style.display = "none";
+  empty.style.display = "none";
+  errEl.textContent = "";
+
+  try {
+    const res = await fetch(`${API_BASE}/admin/pending`, {
+      headers: { "Authorization": `Bearer ${token}` },
+    });
+    const data = await res.json();
+    loading.style.display = "none";
+
+    if (!res.ok) { errEl.textContent = data.error; return; }
+    if (!data.users || data.users.length === 0) {
+      empty.style.display = "block";
+      return;
+    }
+
+    list.style.display = "grid";
+    list.innerHTML = data.users.map(u => `
+      <div class="pending-card glass-card" id="card-${u.id}">
+        <div class="pending-info">
+          <span class="pending-email">${escapeHtml(u.email)}</span>
+          <span class="pending-date">${new Date(u.created_at).toLocaleString("zh-CN")}</span>
+        </div>
+        <div class="pending-actions">
+          <button class="btn-approve" onclick="handleApprove(${u.id}, 'approved')">通过</button>
+          <button class="btn-reject" onclick="handleApprove(${u.id}, 'rejected')">拒绝</button>
+        </div>
+        <span class="pending-status" id="status-${u.id}"></span>
+      </div>
+    `).join("");
+  } catch {
+    loading.style.display = "none";
+    errEl.textContent = "加载失败，请刷新重试";
+  }
+}
+
+async function handleApprove(userId, action) {
+  const token = localStorage.getItem("nanocat-token");
+  const statusEl = document.getElementById(`status-${userId}`);
+
+  try {
+    const res = await fetch(`${API_BASE}/admin/approve`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+      body: JSON.stringify({ userId, action }),
+    });
+    const data = await res.json();
+
+    if (res.ok) {
+      const card = document.getElementById(`card-${userId}`);
+      card.style.opacity = "0.5";
+      card.querySelector(".pending-actions").style.display = "none";
+      statusEl.textContent = action === "approved" ? "已通过" : "已拒绝";
+      statusEl.style.color = action === "approved" ? "#22c55e" : "#ef4444";
+    } else {
+      statusEl.textContent = data.error || "操作失败";
+      statusEl.style.color = "#ef4444";
+    }
+  } catch {
+    statusEl.textContent = "网络错误";
+    statusEl.style.color = "#ef4444";
+  }
+}
+
+function showNoAccess() {
+  document.getElementById("adminPage").style.display = "none";
+  document.getElementById("noAccess").style.display = "block";
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+</script>
+</body>
+</html>
