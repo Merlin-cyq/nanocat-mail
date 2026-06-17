@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客 - NanoCat Mail</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="background"></div>
+
+<header>
+    <a href="index.html" class="logo">NanoCat Mail</a>
+    <nav>
+        <a href="index.html">首页</a>
+        <a href="index.html#features">功能</a>
+        <a href="apply.html">申请</a>
+        <a href="about.html">关于</a>
+        <a href="blog.html" class="active">博客</a>
+        <a href="#" class="nav-btn-login" id="loginBtn">登录</a>
+    </nav>
+</header>
+
+<section class="about-hero">
+    <h1>博客与公告</h1>
+    <p>NanoCat Mail 最新动态与开发进展</p>
+</section>
+
+<section class="blog-section">
+    <div class="blog-list">
+
+        <article class="blog-post glass-card">
+            <div class="blog-meta">
+                <span class="blog-date">2026-06-16</span>
+                <span class="blog-tag current">公告</span>
+            </div>
+            <h2 class="blog-title">NanoCat Mail 官网正式上线</h2>
+            <p class="blog-excerpt">
+                经过一段时间的筹备，NanoCat Mail 官方网站已在 Cloudflare Pages 上成功部署并上线。
+                nanocat.xin 域名已正式启用，标志着 NanoCat 项目迈出了重要的第一步。
+            </p>
+            <div class="blog-body">
+                <p>
+                    本次上线的官网包含以下功能页面：
+                </p>
+                <ul>
+                    <li><strong>首页</strong> — 项目概览与核心特色展示</li>
+                    <li><strong>关于页面</strong> — 项目理念、开发时间线与路线图</li>
+                    <li><strong>申请页面</strong> — 社区邀请机制说明</li>
+                    <li><strong>邮箱 App 演示</strong> — 基于 localStorage 的前端邮件界面</li>
+                </ul>
+                <p>
+                    官网采用暗色主题与毛玻璃设计风格，适配桌面与移动端浏览。
+                    目前邮箱 App 为前端演示版本，后续将接入真实邮件服务。
+                </p>
+            </div>
+        </article>
+
+        <article class="blog-post glass-card">
+            <div class="blog-meta">
+                <span class="blog-date">2026-06-10</span>
+                <span class="blog-tag current">开发</span>
+            </div>
+            <h2 class="blog-title">邮箱 App 演示版开发完成</h2>
+            <p class="blog-excerpt">
+                NanoCat Mail 邮箱 App 前端演示版已完成开发，支持收件箱、星标、
+                归档、草稿、发送等核心邮件操作流程。
+            </p>
+            <div class="blog-body">
+                <p>
+                    演示版基于纯前端技术（HTML/CSS/JS）构建，数据存储在浏览器 localStorage 中，
+                    方便快速体验完整的邮件界面交互。主要功能包括：
+                </p>
+                <ul>
+                    <li>收件箱浏览与管理（标记已读/未读）</li>
+                    <li>邮件星标收藏</li>
+                    <li>邮件归档 / 移回收件箱</li>
+                    <li>写信、保存草稿、发送</li>
+                    <li>邮件搜索与过滤</li>
+                </ul>
+                <p>
+                    该演示版为后续接入 IMAP/SMTP 或后端 API 做好了架构准备。
+                </p>
+            </div>
+        </article>
+
+        <article class="blog-post glass-card">
+            <div class="blog-meta">
+                <span class="blog-date">2026-06-05</span>
+                <span class="blog-tag current">公告</span>
+            </div>
+            <h2 class="blog-title">域名注册与项目启动</h2>
+            <p class="blog-excerpt">
+                nanocat.xin 域名已于近期注册成功，NanoCat Mail 项目正式启动。
+                邮箱系统规划与社区邀请机制设计同步推进中。
+            </p>
+            <div class="blog-body">
+                <p>
+                    NanoCat Mail 是一个面向朋友的小型私人邮箱社区项目。
+                </p>
+                <p>
+                    <strong>Nano</strong> 代表小巧与无限可能，<strong>Cat</strong> 代表自由、探索与好奇。
+                </p>
+                <p>
+                    我们希望构建一个小而精、稳定可靠的邮件服务，让每一个 @nanocat.xin 
+                    地址都拥有独特的归属感。项目采用严格的邀请制，通过站长直邀或朋友推荐的方式加入社区。
+                </p>
+            </div>
+        </article>
+
+    </div>
+</section>
+
+<footer>
+    © 2026 NanoCat Mail
+</footer>
+
+<div class="modal-overlay" id="loginModal">
+    <div class="modal-content glass-card">
+        <span class="modal-close" id="modalClose">&times;</span>
+        <h3>🐱 提示</h3>
+        <p>NanoCat 账户中心正在全力建设中。</p>
+        <p style="color: #aaa; font-size: 14px; margin-top: 10px;">预计 2026 Q3~Q4 随用户管理后台及邮箱系统同步开放，敬请期待！</p>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

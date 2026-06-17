@@ -460,3 +460,109 @@ footer{
 .logout-link:hover {
     color: #8b5cf6;
 }
+
+/* ==========================================
+   7. 博客/公告页面 (blog.html)
+   ========================================== */
+.blog-section {
+    padding: 40px 10% 80px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.blog-list {
+    display: grid;
+    gap: 30px;
+}
+
+.blog-post {
+    cursor: default;
+    transition: 0.3s;
+}
+
+.blog-post:hover {
+    border-color: rgba(139, 92, 246, 0.3);
+    box-shadow: 0 0 35px rgba(139, 92, 246, 0.2);
+}
+
+.blog-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.blog-date {
+    color: #888;
+    font-size: 14px;
+}
+
+.blog-tag {
+    font-size: 12px;
+    padding: 2px 10px;
+    border-radius: 20px;
+    border: 1px solid;
+}
+
+.blog-tag.done {
+    color: #22c55e;
+    border-color: #22c55e;
+}
+
+.blog-tag.current {
+    color: #3b82f6;
+    border-color: #3b82f6;
+}
+
+.blog-tag.future {
+    color: #8b5cf6;
+    border-color: #8b5cf6;
+}
+
+.blog-title {
+    font-size: 26px;
+    margin-bottom: 14px;
+    color: #fff;
+}
+
+.blog-excerpt {
+    color: #ccc;
+    line-height: 1.8;
+    font-size: 16px;
+    margin-bottom: 18px;
+}
+
+.blog-body {
+    color: #aaa;
+    line-height: 1.9;
+    font-size: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: 18px;
+}
+
+.blog-body p {
+    margin-bottom: 12px;
+}
+
+.blog-body ul {
+    margin: 8px 0 16px 20px;
+}
+
+.blog-body li {
+    margin-bottom: 6px;
+    color: #bbb;
+}
+
+.blog-body strong {
+    color: #ddd;
+}
+
+@media(max-width: 768px) {
+    .blog-section {
+        padding: 30px 5% 60px;
+    }
+
+    .blog-title {
+        font-size: 22px;
+    }
+}
