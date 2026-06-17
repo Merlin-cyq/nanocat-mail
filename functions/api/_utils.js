@@ -2,7 +2,7 @@
 // 共享工具：JWT / 密码 / CORS
 // =============================================
 
-const JWT_SECRET = "REPLACE_WITH_YOUR_SECRET_KEY"; // 部署前请更换为一个长的随机字符串
+const JWT_SECRET = "LqYGbRCFe3rJ5MAImBOSujyToaWDQ02UwvZEHznP"; // 部署前请更换为一个长的随机字符串
 
 // ---------- CORS ----------
 export function corsHeaders() {
